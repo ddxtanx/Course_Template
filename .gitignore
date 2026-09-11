@@ -1,0 +1,23 @@
+# 1. Ignore all files at the root level
+*
+
+# 2. Allow Git to look inside all subdirectories
+!*/
+
+# 3. Whitelist the .gitignore file itself (highly recommended)
+!.gitignore
+
+# 4. Ignore all files inside subdirectories by default
+*/**
+
+# 5. Un-ignore all subdirectories recursively so Git can scan them
+!*/**/
+
+# 6. Whitelist your target file extensions globally within subdirectories
+!**/*.tex
+!**/*.pdf
+!**/*.py
+!**/*.gif
+!**/*.png
+!**/*.html
+!LICENSE
