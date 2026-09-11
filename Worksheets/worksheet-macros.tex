@@ -1,13 +1,47 @@
+% worksheet-macros.tex -- shared package setup for worksheet-template.tex.
+%
+% NOTE ON PATHS: every template in this repository is stored one level up
+% from where it is compiled (see README.md). All relative \input paths
+% below are resolved against the folder the document is compiled in,
+% which sits one directory above this file.
+
+% --- Math ------------------------------------------------------------
+% amsmath: equation environments and numbering
+% amsfonts: \mathbb etc.  |  mathrsfs: \mathfrak  |  stmaryrd: extra symbols
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
 \usepackage{stmaryrd}
+
+% --- Layout and glyphs ------------------------------------------------
+% float: [H] float placement (stop floats where you put them)
+% fontspec: Unicode/OpenType fonts (compile with XeLaTeX or LuaLaTeX)
+% emoji: emoji glyphs in the text
 \usepackage{float}
 \usepackage{fontspec}
 \usepackage{emoji}
+
+% --- Typography --------------------------------------------------------
+% Atkinson Hyperlegible as the document-wide sans serif (sfdefault):
+% a high-legibility face that is easier to read for students with
+% dyslexia or low vision.
 \usepackage[sfdefault]{atkinson}
-\usepackage[dvipsnames]{xcolor}
+
+% --- Colors -------------------------------------------------------------
+% dvipsnames: extended named color palette (the Accessible* colors in
+%   lecture-macros.tex are built on it);
+% table: \rowcolors / \cellcolor for shading worksheet tables.
+% NOTE: xcolor may only be loaded ONCE per document -- a second
+% \usepackage{xcolor} with different options is a fatal "Option clash"
+% error, so ALL of its options are listed here.
+\usepackage[dvipsnames,table]{xcolor}
+
+% --- Multimedia ---------------------------------------------------------
+% animate: embeds audio/video (and legacy Flash) media in the worksheet.
 \usepackage{animate}
+
+% --- Bibliography --------------------------------------------------------
+% biblatex (biber backend): citations and a reference list for worksheets.
 \usepackage[
   backend=biber,
   style=alphabetic,
@@ -16,13 +50,21 @@
   isbn=true,
   backref=true
 ]{biblatex}
+
+% --- Links ---------------------------------------------------------------
+% hyperref makes every \ref/citation/URL clickable in the PDF.
+% Link colors must satisfy WCAG 1.4.3 (>= 4.5:1 contrast on white):
+%   blue = 8.6:1, green!40!black = 7.2:1.
+% (The old cyan/magenta values measured 1.25:1 / 3.1:1 and failed.)
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
-  filecolor=magenta,
-  urlcolor=cyan,
+  filecolor=blue,
+  urlcolor=green!40!black,
 }
-\usepackage[table]{xcolor}
-\input{../../macros.tex}
 
+% --- Shared course macros ------------------------------------------------
+% Root macros.tex: math shorthands used across all course documents
+% (\RR, \NN, \ZZ, \QQ, \grad, \curl, \tr, \der, \pder, ...).
+\input{../../macros.tex}

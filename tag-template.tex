@@ -1,6 +1,9 @@
 \DocumentMetadata{
-  pdfstandard=a-4,    % PDF/A-4 archival standard
-  pdfstandard=ua-2,   % PDF/UA-2 accessibility standard
+  % PDF standards: ONE key whose value is a comma-separated list --
+  % UA-2 (accessibility) plus A-4f (archival; the archival companion of
+  % UA-2). Do NOT use separate pdfstandard=... keys: with ordinary
+  % key-value parsing only the last one takes effect.
+  pdfstandard={UA-2,A-4f},
   lang=en-US,
   tagging=on,
   tagging-setup={

@@ -1,5 +1,24 @@
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{unicode-math}
-\usepackage[colorlinks=true]{hyperref}
-\input{../../macros.tex}
+% homework-macros.tex -- shared package setup for homework-template.tex
+% (article class).
+%
+% NOTE ON PATHS: every template in this repository is stored one level up
+% from where it is compiled (see README.md). The \input path below is
+% resolved against the folder the document is compiled in, which sits
+% one directory above this file.
 
+% amsmath + amssymb + amsthm: full math support and proof environments
+% (\newtheorem, \begin{proof}, ...).
+\usepackage{amsmath, amssymb, amsthm}
+
+% unicode-math: math typeset with OpenType math fonts (needed under
+% XeLaTeX/LuaLaTeX so math matches the text fonts).
+\usepackage{unicode-math}
+
+% hyperref: clickable links (the template uses \href for the textbook
+% problem sources); loaded after the math packages so it can patch them.
+% Uses hyperref's default link colors.
+\usepackage[colorlinks=true]{hyperref}
+
+% Shared course math shorthands (\RR, \NN, \ZZ, \QQ, \grad, \curl, \tr,
+% \der, \pder, ...) from the repository root.
+\input{../../macros.tex}

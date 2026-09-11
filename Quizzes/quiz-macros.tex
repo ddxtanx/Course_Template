@@ -1,4 +1,21 @@
+% quiz-macros.tex -- shared package setup for quiz-template.tex (exam class).
+%
+% NOTE ON PATHS: every template in this repository is stored one level up
+% from where it is compiled (see README.md). All relative \input paths
+% below are resolved against the folder the document is compiled in,
+% which sits one directory above this file.
+
+% bm: bold vectors (\bm{v}) for physics-style notation in quiz math.
 \usepackage{bm}
+
+% --- exam-class patch: point labels next to each \item ---------------------------
+% Redefines exam.cls's internal \item@points@pageinfo so the "N pts" label
+% is typeset in a group and inserted into the \@labels box -- the box
+% exam.cls uses (since v2.218) to attach page-info to the right \item even
+% when a question starts with a list/verbatim environment (those
+% environments clobber \everypar, which is why the old approach broke).
+% \makeatletter is required so the @-names below resolve; the matching
+% \makeatother below restores normal catcodes for the rest of the document.
 \makeatletter
 \ExplSyntaxOn
 \def\item@points@pageinfo{%
@@ -46,7 +63,7 @@
     \fi
     \global \@placepointsfalse
   \fi
-  % Version 2.218$\beta$, 2007/10/31 changes:
+  % Version 2.218$\beta$, 2007-10-31 changes:
   % Instead of appending
   %   \the \pageinfo@commands \the \point@toks
   % to \everypar, we insert them into the box \@labels.  This corrects
@@ -63,7 +80,16 @@
     \the \point@toks}%
 }
 \ExplSyntaxOff
+\makeatother
+
+% --- Tagged PDF: table headers -----------------------------------------------------
+% Tell tagpdf to mark row 1 of every table as a header row, so screen
+% readers announce it as a table header.
 \tagpdfsetup{table/header-rows={1}}
+
+% --- Name / Student ID box --------------------------------------------------------------
+% Prints the answer instructions plus fill-in lines for Name and Student
+% ID at the top of the quiz sheet.
 \newcommand{\NameSection}{\vspace{-2in}\begin{center}
 \fbox{\fbox{\parbox{5.5in}{\centering
 Answer the questions in the spaces provided on the
@@ -73,6 +99,10 @@ continue on the back of the page.}}}
 \vspace{0.2in}
 \makebox[\textwidth]{Name: \enspace\hrulefill}
 \makebox[\textwidth]{Student ID: \enspace\hrulefill}}
+
+% --- Points summary ----------------------------------------------------------------------
+% "This quiz is worth \numpoints points ... 15 minutes" plus the exam-
+% class \pointtable listing the points per question.
 \newcommand{\PointsSection}{
   This quiz is worth \numpoints\ points and consists of \numquestions\ questions. You have 15 minutes to complete the quiz.
 
@@ -80,5 +110,11 @@ continue on the back of the page.}}}
     \pointtable[v][questions]
   \end{center}
 }
+
+% --- Math -------------------------------------------------------------------------------
 \usepackage{amsmath,amssymb}
+
+% --- Shared course macros ---------------------------------------------------------------
+% Root macros.tex: math shorthands used across all course documents
+% (\RR, \NN, \ZZ, \QQ, \grad, \curl, \tr, \der, \pder, ...).
 \input{../../macros.tex}
