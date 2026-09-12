@@ -21,4 +21,5 @@
 !**/*.png
 !**/*.html
 !LICENSE
+!README.md
 !**/*.sh
